@@ -10,25 +10,6 @@
   margin: 0 auto;
 }
 
-ul {
-  list-style-type: none;
-}
 
-.header {
-  grid-area: h;
-  background-color: gold;
-}
 
-.header img {
-  width: 30px;
-}
 
-.nav {
-  grid-area: n;
-  background-color: gray;
-}
-
-.content {
-  grid-area: c;
-  background-color: green;
-}
