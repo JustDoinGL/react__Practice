@@ -1,0 +1,17 @@
+ul {
+  list-style-type: none;
+}
+
+.nav {
+  grid-area: n;
+  background-color: gray;
+}
+
+.item {
+  color: white;
+}
+
+.active {
+  color: aqua;
+  border-bottom: solid 2px white;
+}
