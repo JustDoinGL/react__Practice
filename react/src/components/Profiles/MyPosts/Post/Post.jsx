@@ -9,6 +9,7 @@ const Post = (props) => {
                     <h3>{props.name}</h3>
                     <p>{props.text}</p>
                     <span>Likes: {props.valueLikes}</span>
+                    <button>Delete post</button>
                 </div>
             </div>
         </div>
