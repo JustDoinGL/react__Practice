@@ -1,7 +1,6 @@
-import classes from './Posts.module.css'
+import classes from './Post.module.css'
 
-
-const Posts = () => {
+const Post = () => {
     return (
         <div>
             <div className={classes.item}>
@@ -14,4 +13,4 @@ const Posts = () => {
     );
 }
 
-export default Posts
+export default Post
