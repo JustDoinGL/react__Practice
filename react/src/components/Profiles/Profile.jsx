@@ -1,3 +1,4 @@
+import Posts from './Posts/Posts';
 import classes from './Profile.module.css'
 
 
@@ -16,12 +17,7 @@ const Profile = () => {
             <div>
                 New post
             </div>
-            <div>
-                post 1
-            </div>
-            <div>
-                post 2
-            </div>
+            <Posts />
         </div>
     );
 }
