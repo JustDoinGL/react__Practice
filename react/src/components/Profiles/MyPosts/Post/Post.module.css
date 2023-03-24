@@ -1,3 +1,11 @@
 .item {
-    color: greenyellow;
-  }
+  margin: 20px;
+  display: flex;
+  color: greenyellow;
+}
+
+.item img {
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
