@@ -1,6 +1,6 @@
+import clasess from './Settings.module.css'
 
-
-const Dialogs = () => {
+const Settings = () => {
     return (
         <div>
          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique voluptatem in nobis repellat illum vel a saepe at blanditiis odit cum suscipit placeat reprehenderit ipsam doloremque, consequuntur optio eligendi!</p>
@@ -8,4 +8,4 @@ const Dialogs = () => {
     );
 }
 
-export default Dialogs
+export default Settings
