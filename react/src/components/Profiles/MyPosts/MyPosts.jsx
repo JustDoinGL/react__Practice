@@ -1,9 +1,12 @@
 import Post from './Post/Post';
 
-const postsData = [
-    {id: 1, name: 'Andrew', text: 'Hello world!',  valueLikes:'12' },
-    {id: 2, name: 'Alex', text: 'Hi react',  valueLikes:'33' }
+let postsData = [
+    { id: 1, name: 'Andrew', text: 'Hello world!', valueLikes: '12' },
+    { id: 2, name: 'Alex', text: 'Hi react', valueLikes: '33' },
+    { id: 2, name: 'Alex', text: 'Hi react', valueLikes: '33' },
 ]
+
+let outputPosts = postsData.map((element) => <Post text={element.text} name={element.name} valueLikes={element.valueLikes} />)
 
 const MyPosts = () => {
     return (
@@ -13,10 +16,10 @@ const MyPosts = () => {
             </div>
             <div>
                 <p>New post: </p>
-                <textarea  id="" ></textarea>
+                <textarea id="" ></textarea>
                 <button>Send</button>
             </div>
-            <Post text={postsData[0].text} name={postsData[0].name} valueLikes={postsData[0].valueLikes} />
+            {outputPosts}
         </div>
     );
 }
