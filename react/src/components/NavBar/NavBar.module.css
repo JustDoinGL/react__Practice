@@ -13,5 +13,9 @@ ul {
 
 .active {
   color: aqua;
-  border-bottom: solid 2px white;
+  border-bottom: solid 2px aqua;
+}
+
+a {
+  text-decoration:  none;
 }
