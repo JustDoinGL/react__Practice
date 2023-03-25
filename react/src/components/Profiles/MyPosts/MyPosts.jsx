@@ -1,5 +1,9 @@
 import Post from './Post/Post';
 
+const postsData = [
+    {id: 1, name: 'Andrew', text: 'Hello world!',  valueLikes:'12' },
+    {id: 2, name: 'Alex', text: 'Hi react',  valueLikes:'33' }
+]
 
 const MyPosts = () => {
     return (
@@ -12,8 +16,7 @@ const MyPosts = () => {
                 <textarea  id="" ></textarea>
                 <button>Send</button>
             </div>
-            <Post text='Hello world!' name='Andrew' valueLikes='12' />
-            <Post text='Hi react' name='Alex' valueLikes='33' />
+            <Post text={postsData[0].text} name={postsData[0].name} valueLikes={postsData[0].valueLikes} />
         </div>
     );
 }
