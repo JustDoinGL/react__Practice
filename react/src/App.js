@@ -8,6 +8,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
 import State from './redux/State';
+import Asside from './components/NavBar/Assides/Asside';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     <BrowserRouter>
       <div className="app">
         <Header />
-        <NavBar />
+        <NavBar assideData={State.assides}/>
         <div className='app-content'>
           <Routes>
             <Route path="/" element={<Profile postsData={State.postsData} />} />
@@ -25,7 +26,7 @@ function App() {
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />
           </Routes>
-        </div>
+        </div>    
       </div>
     </BrowserRouter>
   );
