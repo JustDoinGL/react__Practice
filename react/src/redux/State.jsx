@@ -26,4 +26,9 @@ const State = {
     ],
 }
 
+export const addPost = (Messsage) => {
+    let newPost = { id: 6, name: 'Alex', text: Messsage, valueLikes: '0' }
+    State.postsData.push(newPost)
+}
+
 export default State

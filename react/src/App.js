@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
 import State from './redux/State';
 import Asside from './components/NavBar/Assides/Asside';
+import {addPost} from './redux/State';
 
 
 function App() {
@@ -19,8 +20,8 @@ function App() {
         <NavBar assideData={State.assides}/>
         <div className='app-content'>
           <Routes>
-            <Route path="/" element={<Profile postsData={State.postsData} />} />
-            <Route path='/profile' element={<Profile postsData={State.postsData} />} />
+            <Route path="/" element={<Profile postsData={State.postsData} addPost={addPost} />} />
+            <Route path='/profile' element={<Profile postsData={State.postsData} addPost={addPost}/>} />
             <Route path='/messages/*' element={<Dialogs messageData={State.messageData} dialogData={State.dialogData} />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />

@@ -6,10 +6,8 @@ const MyPosts = (props) => {
 
     let outputPosts = props.postsData.map((element) => <Post text={element.text} name={element.name} valueLikes={element.valueLikes} />)
 
-    // this.infoTextarea = React.createRef();
-
     let addPost = () => {
-        // let text = infoTextarea.current.value
+        props.addPost('Hi')
         alert("a")
     }
 
