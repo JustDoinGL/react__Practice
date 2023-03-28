@@ -1,3 +1,5 @@
+import {renderFullTreee} from './../index';
+
 const State = {
     dialogData: [
         { name: 'Andrew', id: '1' },
@@ -29,6 +31,7 @@ const State = {
 export const addPost = (Messsage) => {
     let newPost = { id: 6, name: 'Alex', text: Messsage, valueLikes: '0' }
     State.postsData.push(newPost)
+    renderFullTreee()
 }
 
 export default State
