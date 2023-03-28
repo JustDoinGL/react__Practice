@@ -1,16 +1,17 @@
 import Post from './Post/Post';
-import { React } from 'react';
+import React, { Component } from 'react';
+
 
 
 const MyPosts = (props) => {
 
     let outputPosts = props.postsData.map((element) => <Post text={element.text} name={element.name} valueLikes={element.valueLikes} />)
+    let myInput = React.createRef()
 
     let addPost = () => {
-        props.addPost('Hi')
+        let text = "Helloy"
+        props.addPost(text)
     }
-
-    // Не работает ссылка на реакт создание объекта, нужно разобраться чтоб работал текст и его можно было опубликовать.
 
     return (
         <div>
@@ -19,7 +20,7 @@ const MyPosts = (props) => {
             </div>
             <div>
                 <p>New post: </p>
-                <textarea></textarea>
+                <textarea ref={myInput}></textarea>
                 <button onClick={addPost}>Send</button>
             </div>
             {outputPosts}
