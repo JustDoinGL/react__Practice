@@ -20,7 +20,7 @@ const MyPosts = (props) => {
             </div>
             <div>
                 <p>New post: </p>
-                <textarea ref={myInput}></textarea>
+                <textarea></textarea>
                 <button onClick={addPost}>Send</button>
             </div>
             {outputPosts}
