@@ -1,21 +1,11 @@
-import { useState } from 'react';
 import styles from './Square.module.css'
 
-function Square() {
-    const [value, setValue] = useState(null);
-
-    function handleClick() {
-        setValue('X');
-    }
-
+function Square({ value, onSquareClick }) {
     return (
-        <button
-            className={styles.square}
-            onClick={handleClick}
-        >
-            {value}
-        </button>
+      <button className={styles.square} onClick={onSquareClick}>
+        {value}
+      </button>
     );
-}
+  }
 
 export default Square

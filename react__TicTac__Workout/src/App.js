@@ -1,13 +1,14 @@
 import './App.css';
-import Board from './components/Bord';
+import Board from './components/Board';
+import { useState } from 'react';
+
 
 
 function App() {
+  const [squares, setSquares] = useState(Array(10).fill(null));
   return (
     <>
-      <Board />
-      <Board />
-      <Board />
+     <Board squares={squares} setSquares={setSquares} />
     </>
   );
 }
