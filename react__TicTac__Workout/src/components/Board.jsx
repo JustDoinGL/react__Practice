@@ -1,12 +1,10 @@
 import styles from './Board.module.css';
 import Square from './Square/Square';
-import Game from './Game/Game';
 
 
 function Board(props) {
     return (
         <>
-            < Game />
             <div className={styles.board}>
                 <Square value={props.squares[0]} onSquareClick={() => props.handleClick(0)} />
                 <Square value={props.squares[1]} onSquareClick={() => props.handleClick(1)} />
