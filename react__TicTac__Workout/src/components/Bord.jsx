@@ -1,8 +1,9 @@
-import Square from './../Bord/Square/Square';
+import Square from './Square/Square';
+import stules from './Bord.module.css'
 
 function Board() {
     return (
-        <div className="board-row">
+        <div className={stules.boardRow}>
             <Square />
             <Square />
             <Square />

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './Square.module.css'
 
 function Square() {
     const [value, setValue] = useState(null);
@@ -9,7 +10,7 @@ function Square() {
 
     return (
         <button
-            className="square"
+            className={styles.square}
             onClick={handleClick}
         >
             {value}

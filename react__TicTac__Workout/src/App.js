@@ -1,5 +1,6 @@
 import './App.css';
-import Board from './components/Square/Square';
+import Board from './components/Bord';
+
 
 function App() {
   return (
