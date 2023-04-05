@@ -1,29 +1,33 @@
 import React from "react";
 import Input from "../UI/Input/Input";
 import Button from "./../UI/Button/Button";
+import { useState } from "react";
 
 function PostForm(props) {
   const label = props.info;
 
+  const [post, setPost] = useState({ text: "", name: "" });
+
   function addNewPost(e) {
     e.preventDefault();
-    label.setPosts([...label.posts, { ...label.post, id: Date.now() }]);
-    label.setPost({ title: "", body: "" });
+    const newPost = { ...post, id: Date.now() };
+    label.crateNewPost(newPost);
+    setPost({ text: "", name: "" });
   }
   return (
     <form>
       <Input
-        value={label.post.name}
+        value={post.name}
         onChange={(element) => {
-            label.setPost({ ...label.post, name: element.target.value });
+          setPost({ ...post, name: element.target.value });
         }}
         type="text"
         placeholder="ВВедите название"
       />
       <Input
-        value={label.post.text}
+        value={post.text}
         onChange={(element) => {
-            label.setPost({ ...label.post, text: element.target.value });
+          setPost({ ...post, text: element.target.value });
         }}
         type="text"
         placeholder="ВВедите текст"
