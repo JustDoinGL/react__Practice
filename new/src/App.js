@@ -23,8 +23,21 @@ function App() {
 
   function addNewPost(e) {
     e.preventDefault();
-    console.log(title);
+    return (
+      <>
+        <Input
+          value={title2+title}
+          onChange={(element) => {
+            setTitile(element.target.value);
+          }}
+          type="text"
+          placeholder="ВВедите название"
+        />
+      </>
+    );
   }
+
+  const [title2, setTitile2] = useState("");
 
   return (
     <div className="App">
@@ -39,7 +52,14 @@ function App() {
           type="text"
           placeholder="ВВедите название"
         />
-        <Input type="text" placeholder="ВВедите текст" />
+        <Input
+          value={title2}
+          onChange={(element) => {
+            setTitile2(element.target.value);
+          }}
+          type="text"
+          placeholder="ВВедите текст"
+        />
         <Button onClick={addNewPost}>Сравнить</Button>
       </form>
       <Lists title="js" post={posts} />
