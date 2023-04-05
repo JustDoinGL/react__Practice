@@ -31,7 +31,10 @@ function App() {
       {/* <Counnter />
       <ClassConter /> */}
         <PostForm info = {{crateNewPost}}  />
-      <Lists title="js" post1={posts} removePost = {removePost} />
+        {posts.length !== 0 
+        ? <Lists title="js" post1={posts} removePost = {removePost} />        
+        : <div>Посты не найдены!</div>
+        }
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>
   );
