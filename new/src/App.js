@@ -3,8 +3,7 @@ import "./styles/app.css";
 // import Counnter from "./components/Counter";
 // import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
-import Button from "./UI/Button/Button";
-import Input from "./UI/Input/Input";
+import PostForm from "./components/PostForm";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -21,35 +20,11 @@ function App() {
 
   const [post, setPost] = useState({ text: "", name: "" });
 
-  function addNewPost(e) {
-    e.preventDefault();
-    setPosts([...posts, { ...post, id: Date.now() }]);
-    setPost({ title: "", body: "" });
-  }
-
   return (
     <div className="App">
       {/* <Counnter />
       <ClassConter /> */}
-      <form>
-        <Input
-          value={post.name}
-          onChange={(element) => {
-            setPost({ ...post, name: element.target.value });
-          }}
-          type="text"
-          placeholder="ВВедите название"
-        />
-        <Input
-          value={post.text}
-          onChange={(element) => {
-            setPost({ ...post, text: element.target.value });
-          }}
-          type="text"
-          placeholder="ВВедите текст"
-        />
-        <Button onClick={addNewPost}>Cоздать пост</Button>
-      </form>
+        <PostForm info = {{posts, setPosts, post, setPost}}  />
       <Lists title="js" post1={posts} />
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>
