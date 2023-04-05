@@ -19,25 +19,13 @@ function App() {
   //   { id: 3, name: "XXXX", text: "aasss222a" },
   // ]);
 
-  const [title, setTitile] = useState("");
+  const [post, setPost] = useState({ text: "", name: "" });
 
   function addNewPost(e) {
     e.preventDefault();
-    return (
-      <>
-        <Input
-          value={title2+title}
-          onChange={(element) => {
-            setTitile(element.target.value);
-          }}
-          type="text"
-          placeholder="ВВедите название"
-        />
-      </>
-    );
+    setPosts([...posts, { ...post, id: Date.now() }]);
+    setPost({ title: "", body: "" });
   }
-
-  const [title2, setTitile2] = useState("");
 
   return (
     <div className="App">
@@ -45,24 +33,24 @@ function App() {
       <ClassConter /> */}
       <form>
         <Input
-          value={title}
+          value={post.name}
           onChange={(element) => {
-            setTitile(element.target.value);
+            setPost({ ...post, name: element.target.value });
           }}
           type="text"
           placeholder="ВВедите название"
         />
         <Input
-          value={title2}
+          value={post.text}
           onChange={(element) => {
-            setTitile2(element.target.value);
+            setPost({ ...post, text: element.target.value });
           }}
           type="text"
           placeholder="ВВедите текст"
         />
-        <Button onClick={addNewPost}>Сравнить</Button>
+        <Button onClick={addNewPost}>Cоздать пост</Button>
       </form>
-      <Lists title="js" post={posts} />
+      <Lists title="js" post1={posts} />
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>
   );

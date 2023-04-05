@@ -4,7 +4,7 @@ const Lists = (props) => {
   return (
     <>
       <h1>{props.title}</h1>
-      {props.post.map(el => <PostItem post = {el} />)}
+      {props.post1.map(el => <PostItem post = {el} />)}
     </>
   );
 };
