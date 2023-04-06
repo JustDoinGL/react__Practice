@@ -4,8 +4,9 @@ import "./styles/app.css";
 // import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
-import PostFilter from './components/PostFilter';
-
+import PostFilter from "./components/PostFilter";
+import MyModal from "./MyModal/MyModal";
+import Button from "./UI/Button/Button";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -21,6 +22,7 @@ function App() {
   // ]);
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -49,15 +51,16 @@ function App() {
     <div className="App">
       {/* <Counnter />
       <ClassConter /> */}
-      <PostForm info={{ crateNewPost }} />
+      <Button onClick={() => setModal(true)}> Показать</Button>
+
+      <MyModal viseble={modal} setViseble={setModal}>
+        <PostForm info={{ crateNewPost }} setViseble={setModal} />
+      </MyModal>
       <hr style={{ margin: "12px" }} />
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      <Lists
-        title="js"
-        info={{removePost, postSortedAnd }}
-      />
+      <Lists title="js" info={{ removePost, postSortedAnd }} />
 
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>

@@ -14,8 +14,17 @@ function PostForm(props) {
     label.crateNewPost(newPost);
     setPost({ text: "", name: "" });
   }
+
   return (
     <form>
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          props.setViseble(false);
+        }}
+      >
+        Закрыть
+      </Button>
       <Input
         value={post.name}
         onChange={(element) => {
