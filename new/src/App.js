@@ -1,26 +1,18 @@
 import React, { useMemo, useState } from "react";
 import "./styles/app.css";
 import {usePosts} from './hooks/use.Posts'
-// import Counnter from "./components/Counter";
-// import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./MyModal/MyModal";
 import Button from "./UI/Button/Button";
+import axios from 'axios';
+
+
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, name: "zzz", text: "aaa" },
-    { id: 2, name: "xxx", text: "aaa1111" },
-    { id: 3, name: "aaa", text: "aasss222a" },
-  ]);
+  const [posts, setPosts] = useState([]);
 
-  // const [posts2, setPosts2] = useState([
-  //   { id: 1, name: "XXXXXXX", text: "aaa" },
-  //   { id: 2, name: "XXXXXX", text: "aaa1111" },
-  //   { id: 3, name: "XXXX", text: "aasss222a" },
-  // ]);
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
@@ -34,11 +26,16 @@ function App() {
     setPosts(posts.filter((p) => p.id !== post.id));
   }
 
+  async function fetchPosts() {
+    const reponse = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    setPosts(reponse.data)
+    console.log(reponse.data)
+  }
+
 
   return (
     <div className="App">
-      {/* <Counnter />
-      <ClassConter /> */}
+      <Button onClick = {fetchPosts}>Получить инфу с сервера!</Button>
       <Button onClick={() => setModal(true)}> Показать</Button>
 
       <MyModal viseble={modal} setViseble={setModal}>

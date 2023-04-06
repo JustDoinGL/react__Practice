@@ -6,13 +6,13 @@ import { useState } from "react";
 function PostForm(props) {
   const label = props.info;
 
-  const [post, setPost] = useState({ text: "", name: "" });
+  const [post, setPost] = useState({ id: "", title: "" });
 
   function addNewPost(e) {
     e.preventDefault();
     const newPost = { ...post, id: Date.now() };
     label.crateNewPost(newPost);
-    setPost({ text: "", name: "" });
+    setPost({ id: "", title: "" });
   }
 
   return (
@@ -26,19 +26,19 @@ function PostForm(props) {
         Закрыть
       </Button>
       <Input
-        value={post.name}
+        value={post.title}
         onChange={(element) => {
-          setPost({ ...post, name: element.target.value });
+          setPost({ ...post, title: element.target.value });
         }}
-        type="text"
+        type="id"
         placeholder="ВВедите название"
       />
       <Input
-        value={post.text}
+        value={post.id}
         onChange={(element) => {
-          setPost({ ...post, text: element.target.value });
+          setPost({ ...post, id: element.target.value });
         }}
-        type="text"
+        type="id"
         placeholder="ВВедите текст"
       />
       <Button onClick={addNewPost}>Cоздать пост</Button>
