@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import "./styles/app.css";
+import {usePosts} from './hooks/use.Posts'
 // import Counnter from "./components/Counter";
 // import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
@@ -23,6 +24,7 @@ function App() {
 
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -32,20 +34,6 @@ function App() {
     setPosts(posts.filter((p) => p.id !== post.id));
   }
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sort) {
-      return [...posts].sort((a, b) =>
-        a[filter.sort].localeCompare(b[filter.sort])
-      );
-    }
-    return posts;
-  }, [filter.sort, posts]);
-
-  const postSortedAnd = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.name.toLowerCase().includes(filter.query.toLowerCase())
-    );
-  }, [filter.query, sortedPosts]);
 
   return (
     <div className="App">
@@ -60,7 +48,7 @@ function App() {
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      <Lists title="js" info={{ removePost, postSortedAnd }} />
+      <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
 
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>
