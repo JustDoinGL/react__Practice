@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, {useState } from "react";
 import "./styles/app.css";
 import {usePosts} from './hooks/use.Posts'
 import Lists from "./components/Lists/Posts/Lists";

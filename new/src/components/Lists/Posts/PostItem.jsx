@@ -6,13 +6,13 @@ function PostItem(props) {
 
   return (
     <div className="item">
-      <div className="name">
+      <div className="id">
         <h1>
           {p.id}. {p.id}
         </h1>
         <p>{p.title}</p>
       </div>
-      <div className="name">
+      <div className="id">
         <Button onClick={() => props.removePost(p)}>Удалить</Button>
       </div>
     </div>
