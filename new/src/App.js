@@ -4,7 +4,8 @@ import "./styles/app.css";
 // import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
-import { PostFilter } from './components/PostFilter';
+import PostFilter from './components/PostFilter';
+
 
 function App() {
   const [posts, setPosts] = useState([
@@ -19,7 +20,7 @@ function App() {
   //   { id: 3, name: "XXXX", text: "aasss222a" },
   // ]);
 
-  const[filter, setFilter] = useState({sort:'', query:''})
+  const [filter, setFilter] = useState({ sort: "", query: "" });
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -31,15 +32,18 @@ function App() {
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
-      return [...posts].sort((a, b) =>  a[filter.sort].localeCompare(b[filter.sort]))
+      return [...posts].sort((a, b) =>
+        a[filter.sort].localeCompare(b[filter.sort])
+      );
     }
-    return posts
-  }, [filter.sort, posts])
+    return posts;
+  }, [filter.sort, posts]);
 
   const postSortedAnd = useMemo(() => {
-    return sortedPosts.filter(post => post.name.toLowerCase().includes(filter.query.toLowerCase()))
-  }, [filter.query, sortedPosts])
-
+    return sortedPosts.filter((post) =>
+      post.name.toLowerCase().includes(filter.query.toLowerCase())
+    );
+  }, [filter.query, sortedPosts]);
 
   return (
     <div className="App">
@@ -48,15 +52,13 @@ function App() {
       <PostForm info={{ crateNewPost }} />
       <hr style={{ margin: "12px" }} />
 
-        <PostFilter filter={filter} setFilter={setFilter} />
+      <PostFilter filter={filter} setFilter={setFilter} />
 
-      {postSortedAnd.length !== 0 ? (
-        <Lists title="js" post1={postSortedAnd} removePost={removePost} />
-      ) : (
-        <h1 style={{ textAlign: "center", fontWeight: "22px" }}>
-          Посты не найдены!
-        </h1>
-      )}
+      <Lists
+        title="js"
+        info={{removePost, postSortedAnd }}
+      />
+
       {/* <Lists title="xxxs" post={posts2} /> */}
     </div>
   );

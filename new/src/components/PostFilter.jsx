@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../UI/Input/Input";
 import Select from "./../UI/Select/Select";
 
-export const PostFilter = ({ filter, setFilter }) => {
+const PostFilter = ({ filter, setFilter }) => {
   return (
     <>
       <Input
@@ -12,7 +12,7 @@ export const PostFilter = ({ filter, setFilter }) => {
       />
 
       <Select
-        onChange={selcotSorted => setFilter({ ...filter, sort: selcotSorted })}
+        onChange={selectedSorted => setFilter({ ...filter, sort: selectedSorted })}
         value={filter.sort}
         options={[
           { value: "name", sort: "По названию" },
@@ -23,3 +23,5 @@ export const PostFilter = ({ filter, setFilter }) => {
     </>
   );
 };
+
+export default PostFilter
