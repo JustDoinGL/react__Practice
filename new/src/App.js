@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import "./styles/app.css";
 // import Counnter from "./components/Counter";
 // import ClassConter from './components/ClassCounter';
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
-import Select from "./UI/Select/Select";
+import { PostFilter } from './components/PostFilter';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -19,7 +19,7 @@ function App() {
   //   { id: 3, name: "XXXX", text: "aasss222a" },
   // ]);
 
-  const [selecterSord, setSelecterSord] = useState('')
+  const[filter, setFilter] = useState({sort:'', query:''})
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -29,10 +29,17 @@ function App() {
     setPosts(posts.filter((p) => p.id !== post.id));
   }
 
-  const postSorted = (sort) => {
-    setSelecterSord(sort)
-    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
-  }
+  const sortedPosts = useMemo(() => {
+    if (filter.sort) {
+      return [...posts].sort((a, b) =>  a[filter.sort].localeCompare(b[filter.sort]))
+    }
+    return posts
+  }, [filter.sort, posts])
+
+  const postSortedAnd = useMemo(() => {
+    return sortedPosts.filter(post => post.name.toLowerCase().includes(filter.query.toLowerCase()))
+  }, [filter.query, sortedPosts])
+
 
   return (
     <div className="App">
@@ -41,18 +48,10 @@ function App() {
       <PostForm info={{ crateNewPost }} />
       <hr style={{ margin: "12px" }} />
 
-      <Select
-      onChange={postSorted}
-      value={selecterSord}
-        options={[
-          { value: "name", sort: "По названию" },
-          { value: "text", sort: "По тексту" },
-        ]}
-        defaultValue={"Сортировка"}
-      />
+        <PostFilter filter={filter} setFilter={setFilter} />
 
-      {posts.length !== 0 ? (
-        <Lists title="js" post1={posts} removePost={removePost} />
+      {postSortedAnd.length !== 0 ? (
+        <Lists title="js" post1={postSortedAnd} removePost={removePost} />
       ) : (
         <h1 style={{ textAlign: "center", fontWeight: "22px" }}>
           Посты не найдены!
