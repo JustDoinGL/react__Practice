@@ -1,22 +1,23 @@
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/app.css";
-import {usePosts} from './hooks/use.Posts'
+import { usePosts } from "./hooks/use.Posts";
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./MyModal/MyModal";
 import Button from "./UI/Button/Button";
-import axios from 'axios';
-
-
+import PostServiese from './API/PostServise';
 
 function App() {
   const [posts, setPosts] = useState([]);
 
-
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
-  const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query)
+  const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+  useEffect( () => {
+    fetchPosts()
+  }, [])
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -27,15 +28,13 @@ function App() {
   }
 
   async function fetchPosts() {
-    const reponse = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    setPosts(reponse.data)
-    console.log(reponse.data)
+    const posts = await PostServiese.getAll()
+    setPosts(posts);
   }
-
 
   return (
     <div className="App">
-      <Button onClick = {fetchPosts}>Получить инфу с сервера!</Button>
+      <Button onClick={fetchPosts}>Получить инфу с сервера!</Button>
       <Button onClick={() => setModal(true)}> Показать</Button>
 
       <MyModal viseble={modal} setViseble={setModal}>
