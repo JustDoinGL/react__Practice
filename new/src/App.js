@@ -6,18 +6,19 @@ import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./MyModal/MyModal";
 import Button from "./UI/Button/Button";
-import PostServiese from './API/PostServise';
+import PostServiese from "./API/PostServise";
 
 function App() {
   const [posts, setPosts] = useState([]);
-
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const [isPostLoading, setisPostLoading] = useState(false);
+
   const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
-  useEffect( () => {
-    fetchPosts()
-  }, [])
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -28,8 +29,10 @@ function App() {
   }
 
   async function fetchPosts() {
-    const posts = await PostServiese.getAll()
+    setisPostLoading(true);
+    const posts = await PostServiese.getAll();
     setPosts(posts);
+    setisPostLoading(false);
   }
 
   return (
@@ -44,9 +47,11 @@ function App() {
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
-
-      {/* <Lists title="xxxs" post={posts2} /> */}
+      {isPostLoading ? (
+        <h1>Идет загрузка</h1>
+      ) : (
+        <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
+      )}
     </div>
   );
 }
