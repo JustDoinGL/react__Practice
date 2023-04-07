@@ -9,14 +9,23 @@ import Button from "./UI/Button/Button";
 import PostServiese from "./API/PostServise";
 import Loader from "./UI/Loader/Loader";
 import { useFeatching } from "./hooks/useFeatching";
+import { getPageCount, getPagesArray } from "./utils/page";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+
+  let pagesArray = getPagesArray(totalPages);
+
   const [fetchPosts, isPostLoading, postError] = useFeatching(async () => {
-    const posts = await PostServiese.getAll();
-    setPosts(posts);
+    const response = await PostServiese.getAll(limit, page);
+    setPosts(response.data);
+    const totalCount = response.headers["x-total-count"];
+    setTotalPages(getPageCount(totalCount, limit));
   });
 
   const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query);
@@ -45,14 +54,23 @@ function App() {
 
       <PostFilter filter={filter} setFilter={setFilter} />
 
-      {postError && 
-      <h1>Произошла ошибка {postError}</h1>}
+      {postError && <h1>Произошла ошибка {postError}</h1>}
 
       {isPostLoading ? (
         <Loader />
       ) : (
         <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
       )}
+      <div
+        style={{
+          margin: '20px 0',
+          textAlign: "center",
+        }}
+      >
+        {pagesArray.map((e) => (
+          <Button>{e}</Button>
+        ))}
+      </div>
     </div>
   );
 }
