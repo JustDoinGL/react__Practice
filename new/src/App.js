@@ -61,14 +61,15 @@ function App() {
       ) : (
         <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
       )}
-      <div
-        style={{
-          margin: '20px 0',
-          textAlign: "center",
-        }}
-      >
+      <div className="pages">
         {pagesArray.map((e) => (
-          <Button>{e}</Button>
+          <button
+            onClick={() => setPage(e)}
+            key = {e}
+            className={page === e ? "pages__item" : "pages__item__active"}
+          >
+            {e}
+          </button>
         ))}
       </div>
     </div>
