@@ -7,6 +7,7 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./MyModal/MyModal";
 import Button from "./UI/Button/Button";
 import PostServiese from "./API/PostServise";
+import Loader from "./UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -31,8 +32,10 @@ function App() {
   async function fetchPosts() {
     setisPostLoading(true);
     const posts = await PostServiese.getAll();
-    setPosts(posts);
-    setisPostLoading(false);
+    setTimeout(async () => {
+      setPosts(posts);
+      setisPostLoading(false);
+    }, 1000);
   }
 
   return (
@@ -48,7 +51,7 @@ function App() {
       <PostFilter filter={filter} setFilter={setFilter} />
 
       {isPostLoading ? (
-        <h1>Идет загрузка</h1>
+        <Loader />
       ) : (
         <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
       )}
