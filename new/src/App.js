@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles/app.css";
-import { usePosts } from "./hooks/use.Posts";
+import { usePosts } from "./hooks/usePosts";
 import Lists from "./components/Lists/Posts/Lists";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
@@ -8,12 +8,16 @@ import MyModal from "./MyModal/MyModal";
 import Button from "./UI/Button/Button";
 import PostServiese from "./API/PostServise";
 import Loader from "./UI/Loader/Loader";
+import { useFeatching } from "./hooks/useFeatching";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
-  const [isPostLoading, setisPostLoading] = useState(false);
+  const [fetchPosts, isPostLoading, postError] = useFeatching(async () => {
+    const posts = await PostServiese.getAll();
+    setPosts(posts);
+  });
 
   const sortedAddSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
@@ -29,19 +33,10 @@ function App() {
     setPosts(posts.filter((p) => p.id !== post.id));
   }
 
-  async function fetchPosts() {
-    setisPostLoading(true);
-    const posts = await PostServiese.getAll();
-    setTimeout(async () => {
-      setPosts(posts);
-      setisPostLoading(false);
-    }, 1000);
-  }
-
   return (
     <div className="App">
-      <Button onClick={fetchPosts}>Получить инфу с сервера!</Button>
-      <Button onClick={() => setModal(true)}> Показать</Button>
+      <Button onClick={fetchPosts}>Новый запрос на сервер</Button>
+      <Button onClick={() => setModal(true)}> Добавить новый пост</Button>
 
       <MyModal viseble={modal} setViseble={setModal}>
         <PostForm info={{ crateNewPost }} setViseble={setModal} />
@@ -49,6 +44,9 @@ function App() {
       <hr style={{ margin: "12px" }} />
 
       <PostFilter filter={filter} setFilter={setFilter} />
+
+      {postError && 
+      <h1>Произошла ошибка {postError}</h1>}
 
       {isPostLoading ? (
         <Loader />

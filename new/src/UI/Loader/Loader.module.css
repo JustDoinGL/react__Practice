@@ -18,7 +18,7 @@
   border: 0.2rem solid #5cb85c;
   border-top-color: transparent;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
