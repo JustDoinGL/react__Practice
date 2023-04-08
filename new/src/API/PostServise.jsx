@@ -13,4 +13,11 @@ export default class PostServiese {
     );
     return reponse;
   }
+
+  static async getById(id) {
+    const reponse = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+    return reponse;
+  }
 }
