@@ -10,6 +10,7 @@ import PostServiese from "./API/PostServise";
 import Loader from "./UI/Loader/Loader";
 import { useFeatching } from "./hooks/useFeatching";
 import { getPageCount, getPagesArray } from "./utils/page";
+import Pagination from "./UI/Pagination/Pagination";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -18,8 +19,6 @@ function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-
-  let pagesArray = getPagesArray(totalPages);
 
   const [fetchPosts, isPostLoading, postError] = useFeatching(async () => {
     const response = await PostServiese.getAll(limit, page);
@@ -32,7 +31,11 @@ function App() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [page]);
+
+  const changePage = (e) => {
+    setPage(e);
+  };
 
   function crateNewPost(newPost) {
     setPosts([...posts, newPost]);
@@ -61,17 +64,7 @@ function App() {
       ) : (
         <Lists title="js" info={{ removePost, sortedAddSearchedPosts }} />
       )}
-      <div className="pages">
-        {pagesArray.map((e) => (
-          <button
-            onClick={() => setPage(e)}
-            key = {e}
-            className={page === e ? "pages__item" : "pages__item__active"}
-          >
-            {e}
-          </button>
-        ))}
-      </div>
+      <Pagination changePage={changePage} totalPages={totalPages} page={page} />
     </div>
   );
 }
