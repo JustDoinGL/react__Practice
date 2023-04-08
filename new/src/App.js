@@ -1,22 +1,14 @@
 import React from "react";
-import Pages from "./Pages/Pages";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Info from "./Pages/Info";
+import { BrowserRouter } from "react-router-dom";
 import './styles/app.css'
+import AppRouter from './UI/AppRouter';
+import Nav from './UI/Nav';
 
 function App() {
   return (
     <BrowserRouter>
-    <div className="nav">
-        <div>
-          <Link className="navItem" to={`/pages`}>Pages</Link>
-          <Link className="navItem" to={`/info`}> Info </Link>
-        </div>
-      </div>
-      <Routes>
-        <Route path="/pages" element={<Pages />} />
-        <Route path="/info" element={<Info />} />
-      </Routes>
+      <Nav />
+      <AppRouter />
     </BrowserRouter>
   );
 }
