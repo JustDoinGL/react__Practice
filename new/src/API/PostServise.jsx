@@ -20,4 +20,11 @@ export default class PostServiese {
     );
     return reponse;
   }
+
+  static async getComments(id) {
+    const reponse = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts/${id}/comments`
+    );
+    return reponse;
+  }
 }
